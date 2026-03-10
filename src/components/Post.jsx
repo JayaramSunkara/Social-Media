@@ -1,7 +1,7 @@
 import { useContext } from "react";
+import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { PostList } from "../store/post-list-store";
-import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 
 const Post = ({ post }) => {
   const { deletePost } = useContext(PostList);

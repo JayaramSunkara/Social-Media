@@ -13,7 +13,6 @@ const CreatePost = () => {
   const tagsElement = useRef();
 
   const handleSubmit = (event) => {
-    console.log(event);
     event.preventDefault();
     const userId = userIdElement.current.value;
     const postTitle = postTitleElement.current.value;
@@ -23,8 +22,6 @@ const CreatePost = () => {
     const dislikes = dislikesElement.current.value;
     const reactions = { likes, dislikes };
     const tags = tagsElement.current.value.split(" ");
-
-    console.log(userId, postTitle, postBody, reactions, tags, views);
 
     userIdElement.current.value = "";
     postTitleElement.current.value = "";

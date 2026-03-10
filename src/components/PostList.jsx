@@ -1,29 +1,38 @@
 import { useContext } from "react";
-import Post from "./Post.jsx";
 import { PostList as PostListData } from "../store/post-list-store.jsx";
+import Post from "./Post.jsx";
 import WelcomeMessage from "./WelcomeMessage.jsx";
 
 const PostList = () => {
   const { postList, addInitialPosts } = useContext(PostListData);
 
-  const handleGetPostsClick = () => {
-    fetch("https://dummyjson.com/posts")
-      .then((res) => res.json())
-      .then((data) => {
-        addInitialPosts(data.posts);
-      });
+  const handleGetPostsClick = async () => {
+    try {
+      const res = await fetch("https://dummyjson.com/posts");
+
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
+
+      const data = await res.json();
+      addInitialPosts(data.posts);
+    } catch (err) {
+      console.error("Failed to fetch posts:", err.message);
+    }
   };
 
-  console.log(postList);
+  // console.log(postList);
 
   return (
     <>
       {postList.length === 0 && (
         <WelcomeMessage onGetPostsClick={handleGetPostsClick} />
       )}
-      {postList.map((post) => (
-        <Post key={post.id} post={post} />
-      ))}
+      <center>
+        {postList.map((post) => (
+          <Post key={post.id} post={post} />
+        ))}
+      </center>
     </>
   );
 };

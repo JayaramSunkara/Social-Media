@@ -61,7 +61,7 @@ function Sidebar({ selectedTab, setSelectedTab }) {
           aria-expanded="false"
         >
           <img
-            src="https://github.com/mdo.png"
+            src="https://avatars.githubusercontent.com/u/192699808?s=400&u=54e3d71e14a9608bb1dd096d84f2c231476fe1a5&v=4"
             alt=""
             width="32"
             height="32"

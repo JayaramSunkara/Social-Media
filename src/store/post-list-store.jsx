@@ -28,17 +28,17 @@ export const PostListProvider = ({ children }) => {
     postListReducer,
     DEFAULT_POST_LIST,
   );
-  const addPost = (userId, postTitle, postBody, reactions, tags, views) => {
+  const addPost = ({ id, userId, title, body, reactions, tags, views }) => {
     dispatchPostList({
       type: "ADD_POST",
       payload: {
-        id: Date.now(),
-        title: postTitle,
-        body: postBody,
-        reactions: reactions,
-        userId: userId,
-        tags: tags,
-        views: views,
+        id,
+        title,
+        body,
+        reactions,
+        userId,
+        tags,
+        views,
       },
     });
   };

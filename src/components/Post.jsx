@@ -24,9 +24,6 @@ const Post = ({ post }) => {
             {tag}
           </span>
         ))}
-        <div className="alert alert-success reactions" role="alert">
-          {post.views} reactions for this post!!
-        </div>
         <button type="button" className="btn btn-outline-primary likes">
           {post.reactions.likes} <AiOutlineLike />
         </button>

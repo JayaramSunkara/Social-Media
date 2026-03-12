@@ -28,7 +28,7 @@ export const PostListProvider = ({ children }) => {
     postListReducer,
     DEFAULT_POST_LIST,
   );
-  const addPost = ({ id, userId, title, body, reactions, tags, views }) => {
+  const addPost = ({ id, userId, title, body, reactions, tags }) => {
     dispatchPostList({
       type: "ADD_POST",
       payload: {
@@ -38,7 +38,6 @@ export const PostListProvider = ({ children }) => {
         reactions,
         userId,
         tags,
-        views,
       },
     });
   };

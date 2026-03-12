@@ -7,7 +7,6 @@ const CreatePost = () => {
   const userIdElement = useRef();
   const postTitleElement = useRef();
   const postBodyElement = useRef();
-  const viewsElement = useRef();
   const likesElement = useRef();
   const dislikesElement = useRef();
   const tagsElement = useRef();
@@ -17,7 +16,6 @@ const CreatePost = () => {
     const userId = userIdElement.current.value;
     const postTitle = postTitleElement.current.value;
     const postBody = postBodyElement.current.value;
-    const views = viewsElement.current.value;
     const likes = likesElement.current.value;
     const dislikes = dislikesElement.current.value;
     const reactions = { likes, dislikes };
@@ -26,7 +24,6 @@ const CreatePost = () => {
     userIdElement.current.value = "";
     postTitleElement.current.value = "";
     postBodyElement.current.value = "";
-    viewsElement.current.value = "";
     likesElement.current.value = "";
     dislikesElement.current.value = "";
     tagsElement.current.value = "";
@@ -37,7 +34,6 @@ const CreatePost = () => {
       reactions: reactions,
       userId: userId,
       tags: tags,
-      views: views,
     };
 
     const res = await fetch("https://dummyjson.com/posts/add", {
@@ -87,18 +83,6 @@ const CreatePost = () => {
           className="form-control"
           id="body"
           placeholder="Share your thoughts with everyone"
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="views" className="form-label">
-          Number of Views
-        </label>
-        <input
-          type="text"
-          ref={viewsElement}
-          className="form-control"
-          id="views"
-          placeholder="Number of people viewed this post"
         />
       </div>
       <div className="mb-3">

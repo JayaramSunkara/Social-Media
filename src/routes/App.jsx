@@ -1,12 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import "./App.css";
-import CreatePost from "./components/CreatePost.jsx";
-import Footer from "./components/Footer.jsx";
-import Header from "./components/Header.jsx";
-import PostList from "./components/PostList.jsx";
-import Sidebar from "./components/Sidebar.jsx";
-import { PostListProvider } from "./store/post-list-store.jsx";
+import CreatePost from "../components/CreatePost.jsx";
+import Footer from "../components/Footer.jsx";
+import Header from "../components/Header.jsx";
+import PostList from "../components/PostList.jsx";
+import Sidebar from "../components/Sidebar.jsx";
+import { PostListProvider } from "../store/post-list-store.jsx";
 
 function App() {
   const [selectedTab, setSelectedTab] = useState("Home");

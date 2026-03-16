@@ -1,63 +1,32 @@
-import { useContext, useRef } from "react";
-import { PostList } from "../store/post-list-store";
+import { Form, redirect } from "react-router-dom";
+
+export async function createPostAction(data) {
+  const formData = await data.request.formData();
+  const postData = Object.fromEntries(formData);
+  postData.tags = postData.tags.split(" ");
+  console.log(postData);
+
+  const res = await fetch("https://dummyjson.com/posts/add", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(postData),
+  });
+  const post = await res.json();
+  console.log(post);
+  
+  return redirect("/");
+}
 
 const CreatePost = () => {
-
-  
-
-  const { addPost } = useContext(PostList);
-
-  const userIdElement = useRef();
-  const postTitleElement = useRef();
-  const postBodyElement = useRef();
-  const likesElement = useRef();
-  const dislikesElement = useRef();
-  const tagsElement = useRef();
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const userId = userIdElement.current.value;
-    const postTitle = postTitleElement.current.value;
-    const postBody = postBodyElement.current.value;
-    const likes = likesElement.current.value;
-    const dislikes = dislikesElement.current.value;
-    const reactions = { likes, dislikes };
-    const tags = tagsElement.current.value.split(" ");
-
-    userIdElement.current.value = "";
-    postTitleElement.current.value = "";
-    postBodyElement.current.value = "";
-    likesElement.current.value = "";
-    dislikesElement.current.value = "";
-    tagsElement.current.value = "";
-
-    const payload = {
-      title: postTitle,
-      body: postBody,
-      reactions: reactions,
-      userId: userId,
-      tags: tags,
-    };
-
-    const res = await fetch("https://dummyjson.com/posts/add", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    const data = await res.json();
-
-    addPost(data);
-  };
-
   return (
-    <form className="create-post" onSubmit={handleSubmit}>
+    <Form className="create-post" method="POST">
       <div className="mb-3">
         <label htmlFor="userId" className="form-label">
           userId
         </label>
         <input
           type="text"
-          ref={userIdElement}
+          name="userId"
           className="form-control"
           id="userId"
           placeholder="Enter your userID"
@@ -69,7 +38,7 @@ const CreatePost = () => {
         </label>
         <input
           type="text"
-          ref={postTitleElement}
+          name="title"
           className="form-control"
           id="title"
           placeholder="Enter title of your post"
@@ -81,7 +50,7 @@ const CreatePost = () => {
         </label>
         <textarea
           type="text"
-          ref={postBodyElement}
+          name="body"
           rows="4"
           className="form-control"
           id="body"
@@ -96,7 +65,7 @@ const CreatePost = () => {
             </label>
             <input
               type="text"
-              ref={likesElement}
+              name="likes"
               className="form-control"
               id="likes"
               placeholder="Likes"
@@ -108,7 +77,7 @@ const CreatePost = () => {
             </label>
             <input
               type="text"
-              ref={dislikesElement}
+              name="dislikes"
               className="form-control"
               id="dislikes"
               placeholder="Dislikes"
@@ -122,7 +91,7 @@ const CreatePost = () => {
         </label>
         <input
           type="text"
-          ref={tagsElement}
+          name="tags"
           className="form-control"
           id="tags"
           placeholder="Enter your hashtags with space"
@@ -131,7 +100,7 @@ const CreatePost = () => {
       <button type="submit" className="btn btn-primary">
         POST
       </button>
-    </form>
+    </Form>
   );
 };
 
